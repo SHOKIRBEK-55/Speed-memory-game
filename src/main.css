@@ -1,0 +1,82 @@
+* {
+	box-sizing: border-box;
+	user-select: none;
+}
+:root {
+	/* --dark: #059f14; */
+	--light: #fffefe;
+	--green: #3add0d;
+	--blue: rgba(12, 153, 247, 0.991);
+	--cell: rgba(100, 97, 97, 0.253);
+}
+
+body {
+
+	margin: 0;
+	height: 100vh;
+	background:url(./bg.jpg);
+}
+
+.container {
+	display: flex;
+	height: 90vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+}
+
+.container .title {
+	color: var(--light);
+}
+
+#board {
+	width: 512px;
+	height: 512px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	background-color: var(--light);
+	gap: 2px;
+	padding: 2px;
+}
+
+.cell {
+	position: relative;
+	display: grid;
+	place-items: center;
+	font-size: 60px;
+	background-color: var(--cell);
+	cursor: pointer;
+	transition: transform 0.03s linear;
+}
+.title {
+	position: relative;
+	top: 30px;
+}
+.cell:active {
+	transform: scale(0.95);
+}
+
+.cell.winner {
+	background-color: var(--blue);
+}
+.cell::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: var(--green);
+	opacity: 1;
+	transition: opacity 0.3s linear;
+}
+
+.active::before,
+.winner::before {
+	opacity: 0;
+}
+
+.active,
+.winner {
+	pointer-events: none;
+}
